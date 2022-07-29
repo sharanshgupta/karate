@@ -2,6 +2,7 @@ package com.sharansh.karate.controllers;
 
 import com.sharansh.karate.domain.Employee;
 import com.sharansh.karate.services.EmployeeService;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,6 +22,7 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
+    @ApiOperation("Get API to fetch employee with a requested id")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Employee> getById(@PathVariable Long id){
         log.info("Request received to fetch employee with id - " + id);
@@ -34,6 +36,7 @@ public class EmployeeController {
         }
     }
 
+    @ApiOperation("Post API to create a new employee")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Employee> createPerson(@RequestBody Employee employee) {
         log.info("Creating employee with id - " + employee.getId());

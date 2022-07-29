@@ -17,6 +17,11 @@ public class ClientAuthenticationInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
+
+        if (request.getRequestURI().contains("swagger")) {
+            return true;
+        }
+
         String username = request.getHeader("username");
         String password = request.getHeader("password");
         boolean isHeaderPresent = (Objects.nonNull(username) && Objects.nonNull(password));
